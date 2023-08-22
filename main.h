@@ -15,6 +15,7 @@ struct specifier
 {
 	int c;
 	char *s;
+	void *p;
 };
 
 typedef struct specifier sign;
