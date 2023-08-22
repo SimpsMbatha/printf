@@ -46,10 +46,18 @@ void print_string(const char *s)
 
 int _printf(const char *format, ...) 
 {
+<<<<<<< HEAD
     if (format == NULL)
     {
         return -1;
     }
+=======
+	int i;
+	int count = 0;
+	int c;
+	char *s;
+	va_list args;
+>>>>>>> 66bc95ca6cad5e6ae594ac1d7ece3b160c7d6389
 
     int i = 0;
     int count = 0;
@@ -60,6 +68,7 @@ int _printf(const char *format, ...)
     {
         if (format[i] == '%') 
 	{
+<<<<<<< HEAD
             i++;
             if (format[i] == '\0') 
 	    {
@@ -94,6 +103,46 @@ int _printf(const char *format, ...)
 	{
             print_char(format[i]);
             count++;
+=======
+		return (-1);
+	}
+
+	for (i = 0; format[i] != '\0'; i++)
+	{
+		if (format[i] == '%')
+		{
+			putchar(format[i]);
+			count++;
+		}
+		else
+		{
+			i++;
+			
+			else if (format[i] == 'c')
+			{
+				c = va_arg(args, int);
+				print_char(c);
+				count++;
+			}
+			else if (format[i] == 's')
+			{
+				s = va_arg(args, char *);
+				print_string(s);
+				count += 5;
+			}
+			else if (format[i] == '%')
+			{
+				putchar('%');
+				count++;
+			}
+			else
+			{
+				putchar('%');
+				putchar(format[i]);
+				count += 2;
+			}
+		}
+>>>>>>> 66bc95ca6cad5e6ae594ac1d7ece3b160c7d6389
 	}
         i++;
     }
