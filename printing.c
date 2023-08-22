@@ -42,11 +42,6 @@ int _printf(const char *format, ...)
 					printf("(nil)");
 				}
 			}
-			else if (specifier == 'p')
-			{
-				conv.p = va_arg(args, void *);
-				printf("%p", conv.p);
-			}
 
 			else if (specifier == '%')
 			{
