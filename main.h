@@ -18,6 +18,7 @@
 #define S_LONG 2
 #define S_SHORT 1
 
+<<<<<<< HEAD
 /**
  * struct fmt - Struct op
  *
@@ -115,3 +116,6 @@ long int convert_size_number(long int num, int size);
 long int convert_size_unsgnd(unsigned long int num, int size);
 
 #endif /* MAIN_H */
+=======
+#endif
+>>>>>>> 6f0f9d658f47755627857176388a1ce3e1dc877d
