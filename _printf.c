@@ -39,61 +39,49 @@ void print_string(const char *s)
 
 int _printf(const char *format, ...)
 {
-	int i = 0;
+	int i;
+	int count = 0;
 	int c;
 	char *s;
 	va_list args;
 
 	va_start(args, format);
 
-	if (format == NULL)
-	{
-		return (-1);
-	}
-
-	while (format[i] != '\0')
+	for (i = 0; format[i] != '\0'; i++)
 	{
 		if (format[i] == '%')
 		{
+			putchar(format[i]);
+			count++;
+		}
+		else
+		{
 			i++;
-
-			if (format[i] == '\0')
-			{
-				va_end(args);
-				return (-1);
-			}
-
-			else if (format[i] == ' ')
-			{
-				va_end(args);
-				return (-1);
-			}
-
+			
 			else if (format[i] == 'c')
 			{
 				c = va_arg(args, int);
 				print_char(c);
+				count++;
 			}
 			else if (format[i] == 's')
 			{
 				s = va_arg(args, char *);
 				print_string(s);
+				count += 5;
 			}
 			else if (format[i] == '%')
 			{
 				putchar('%');
+				count++;
 			}
 			else
 			{
 				putchar('%');
 				putchar(format[i]);
+				count += 2;
 			}
 		}
-		else
-		{
-			print_char(format[i]);
-		}
-		i++;
 	}
 	va_end(args);
 
