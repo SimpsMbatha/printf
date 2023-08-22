@@ -14,6 +14,13 @@ void print_char(char c)
     putchar(c);
 }
 
+/**
+ * print_string - print a string.
+ * @s: the string to print.
+ *
+ * Return: void
+ */
+
 void print_string(const char *s) 
 {
     if (s != NULL) 
@@ -25,6 +32,26 @@ void print_string(const char *s)
 void print_int(int num) 
 {
     printf("%d", num);
+}
+
+void print_unsigned_int(unsigned int num) 
+{
+    printf("%u", num);
+}
+
+void print_octal(unsigned int num) 
+{
+    printf("%o", num);
+}
+
+void print_hex_lower(unsigned int num) 
+{
+    printf("%x", num);
+}
+
+void print_hex_upper(unsigned int num) 
+{
+    printf("%X", num);
 }
 
 int _printf(const char *format, ...) 
@@ -65,6 +92,30 @@ int _printf(const char *format, ...)
 	    {
                 int num = va_arg(args, int);
                 print_int(num);
+                count++;
+            } 
+	    else if (format[i] == 'u') 
+	    {
+                unsigned int num = va_arg(args, unsigned int);
+                print_unsigned_int(num);
+                count++;
+            } 
+	    else if (format[i] == 'o') 
+	    {
+                unsigned int num = va_arg(args, unsigned int);
+                print_octal(num);
+                count++;
+            } 
+	    else if (format[i] == 'x') 
+	    {
+                unsigned int num = va_arg(args, unsigned int);
+                print_hex_lower(num);
+                count++;
+            } 
+	    else if (format[i] == 'X') 
+	    {
+                unsigned int num = va_arg(args, unsigned int);
+                print_hex_upper(num);
                 count++;
             } 
 	    else if (format[i] == '%') 
