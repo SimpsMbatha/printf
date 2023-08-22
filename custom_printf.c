@@ -2,51 +2,27 @@
 #include <stdarg.h>
 #include "main.h"
 
-/**
- * print_char - prints a character.
- * @c: the character to print.
- *
- * Return: void
- */
-
-void print_char(char c)
+void print_char(char c) 
 {
-	putchar(c);
+    putchar(c);
 }
-
-/**
- * print_string - print a string.
- * @s: the string to print.
- *
- * Return: void
- */
 
 void print_string(const char *s) 
 {
-<<<<<<< HEAD
     if (s != NULL) 
     {
         printf("%s", s);
     }
-=======
-	if (s)
-	{
-		while (*s)
-		{
-			putchar(*s);
-			s++;
-		}
-	}
-	else
-	{
-		printf("(nil)");
-	}
->>>>>>> 2206545687d2c5d8fd3002bdaf95bc643970c20e
+}
+
+void print_int(int num) 
+{
+    printf("%d", num);
 }
 
 int _printf(const char *format, ...) 
 {
-    if (format == NULL)
+    if (format == NULL) 
     {
         return -1;
     }
@@ -71,12 +47,18 @@ int _printf(const char *format, ...)
                 int c = va_arg(args, int);
                 print_char(c);
                 count++;
-		} 
+            } 
 	    else if (format[i] == 's') 
-		{
+	    {
                 char *s = va_arg(args, char *);
                 print_string(s);
                 count += (s != NULL) ? strlen(s) : 0;
+            } 
+	    else if (format[i] == 'd' || format[i] == 'i') 
+	    {
+                int num = va_arg(args, int);
+                print_int(num);
+                count++;
             } 
 	    else if (format[i] == '%') 
 	    {
@@ -94,10 +76,11 @@ int _printf(const char *format, ...)
 	{
             print_char(format[i]);
             count++;
-	}
+        }
         i++;
     }
 
     va_end(args);
     return count;
 }
+
