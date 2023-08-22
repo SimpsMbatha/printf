@@ -21,77 +21,68 @@ void print_char(char c)
  * Return: void
  */
 
-void print_string(const char *s)
+void print_string(const char *s) 
 {
-	if (s)
-	{
-		printf("%s", s);
-	}
-	else
-	{
-		return;
-	}
+    if (s != NULL) 
+    {
+        printf("%s", s);
+    }
 }
 
-int _printf(const char *format, ...)
+int _printf(const char *format, ...) 
 {
-	int i = 0;
-	int c;
-	char *s;
-	va_list args;
+    if (format == NULL)
+    {
+        return -1;
+    }
 
-	va_start(args, format);
+    int i = 0;
+    int count = 0;
+    va_list args;
+    va_start(args, format);
 
-	if (format == NULL)
+    while (format[i] != '\0') 
+    {
+        if (format[i] == '%') 
 	{
-		return (-1);
-	}
-
-	while (format[i] != '\0')
+            i++;
+            if (format[i] == '\0') 
+	    {
+                va_end(args);
+                return -1;
+            } 
+	    else if (format[i] == 'c') 
+	    {
+                int c = va_arg(args, int);
+                print_char(c);
+                count++;
+		} 
+	    else if (format[i] == 's') 
+		{
+                char *s = va_arg(args, char *);
+                print_string(s);
+                count += (s != NULL) ? strlen(s) : 0;
+            } 
+	    else if (format[i] == '%') 
+	    {
+                putchar('%');
+                count++;
+            } 
+	    else 
+	    {
+                putchar('%');
+                putchar(format[i]);
+                count += 2;
+            }
+        } 
+	else 
 	{
-		if (format[i] == '%')
-		{
-			i++;
-
-			if (format[i] == '\0')
-			{
-				va_end(args);
-				return (-1);
-			}
-
-			else if (format[i] == ' ')
-			{
-				va_end(args);
-				return (-1);
-			}
-
-			else if (format[i] == 'c')
-			{
-				c = va_arg(args, int);
-				print_char(c);
-			}
-			else if (format[i] == 's')
-			{
-				s = va_arg(args, char *);
-				print_string(s);
-			}
-			else if (format[i] == '%')
-			{
-				putchar('%');
-			}
-			else
-			{
-				putchar('%');
-				putchar(format[i]);
-			}
-		}
-		else
-		{
-			print_char(format[i]);
-		}
-		i++;
+            print_char(format[i]);
+            count++;
 	}
-	va_end(args);
+        i++;
+    }
 
-	return (i);
+    va_end(args);
+    return count;
 }
