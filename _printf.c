@@ -25,11 +25,15 @@ void print_string(const char *s)
 {
 	if (s)
 	{
-		printf("%s", s);
+		while (*s)
+		{
+			putchar(*s);
+			s++;
+		}
 	}
 	else
 	{
-		return;
+		printf("(nil)");
 	}
 }
 
